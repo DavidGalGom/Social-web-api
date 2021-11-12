@@ -4,9 +4,34 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start-dev": "nodemon -q .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^27.0.2",
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.3",
+    "jest": "^27.3.1",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.1.6"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "chalk": "^4.1.2",
+    "debug": "^4.3.2",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-validation": "^3.0.8",
+    "joi": "^17.4.2",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^3.1.2",
+    "mongoose": "^6.0.12",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.3"
+  }
 }
