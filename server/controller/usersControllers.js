@@ -4,8 +4,8 @@ const jwt = require("jsonwebtoken");
 const User = require("../../database/models/user");
 
 const checkUser = async (req, res, next) => {
-  const { username, password } = req.body;
-  const user = await User.findOne({ username });
+  const { userName, password } = req.body;
+  const user = await User.findOne({ userName });
   if (!user) {
     const error = new Error("Authentication failed");
     error.code = 401;
@@ -32,9 +32,15 @@ const checkUser = async (req, res, next) => {
   }
 };
 
-const getUsers = async (req, res) => {
-  const users = await User.find();
-  res.json(users);
+const getUsers = async (req, res, next) => {
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (error) {
+    error.message = "Can't find the users";
+    error.code = 400;
+    next(error);
+  }
 };
 
 module.exports = {

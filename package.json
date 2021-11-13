@@ -4,10 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node .",
     "start-dev": "nodemon -q .",
-    "test": "jest --watchAll",
-    "test-cov": "jest --watchAll --collect-coverage"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
