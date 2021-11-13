@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../../database/models/user");
-const { checkUser } = require("./usersControllers");
+const { checkUser, getUsers } = require("./usersControllers");
 
 jest.mock("../../database/models/user");
 
@@ -77,6 +77,54 @@ describe("Given a User", () => {
       await checkUser(req, res);
 
       expect(res.json).toHaveBeenCalledWith(expectedToken);
+    });
+  });
+});
+
+describe("Given the getUsers function ", () => {
+  describe("When its called", () => {
+    test("Then it should summon the res.json with all the users", async () => {
+      const users = ["efdvs", "efrdvf"];
+      const req = {
+        body: {
+          users,
+        },
+      };
+      User.find = jest.fn().mockResolvedValue(users);
+      const res = {
+        json: jest.fn().mockResolvedValue(),
+      };
+
+      await getUsers(req, res);
+
+      expect(res.json).toHaveBeenCalled();
+    });
+  });
+
+  describe("When its called wrong", () => {
+    test("Then it should summon with and error and code 400 ", async () => {
+      const req = {
+        body: {
+          username: "Davidgg",
+          password: "1234abcd",
+          name: "David",
+          photo: "qwe",
+          bio: "qwe",
+        },
+      };
+      User.find = jest.fn().mockResolvedValue(null);
+      const next = jest.fn();
+      const expectedError = new Error("Can't find the users");
+      expectedError.code = 400;
+
+      await getUsers(req, null, next);
+
+      expect(next).toHaveBeenCalledWith(expectedError);
+      expect(next.mock.calls[0][0]).toHaveProperty(
+        "message",
+        "Can't find the users"
+      );
+      expect(next.mock.calls[0][0]).toHaveProperty("code", 400);
     });
   });
 });
