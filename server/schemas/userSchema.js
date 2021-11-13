@@ -7,7 +7,7 @@ const userValidation = {
       .regex(/[a-zA-Z0-9]{3,30}/)
       .required(),
     name: Joi.string().required(),
-    photo: Joi.string().required(),
+    image: Joi.string().required(),
     bio: Joi.string().required(),
   }),
 };
