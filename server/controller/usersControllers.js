@@ -4,8 +4,8 @@ const jwt = require("jsonwebtoken");
 const User = require("../../database/models/user");
 
 const checkUser = async (req, res, next) => {
-  const { username, password } = req.body;
-  const user = await User.findOne({ username });
+  const { userName, password } = req.body;
+  const user = await User.findOne({ userName });
   if (!user) {
     const error = new Error("Authentication failed");
     error.code = 401;
