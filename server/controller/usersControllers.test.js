@@ -52,4 +52,31 @@ describe("Given a User", () => {
       expect(next.mock.calls[0][0]).toHaveProperty("code", 401);
     });
   });
+
+  describe("When it receives a correct username and a right password", () => {
+    test("Then it should summon the function checkUser with res.json and a token", async () => {
+      const req = {
+        body: {
+          username: "Davidgg",
+          password: "1234abcd",
+          name: "David",
+          photo: "qwe",
+          bio: "qwe",
+        },
+      };
+      const expectedToken = {
+        token: "Token",
+      };
+      const res = {
+        json: jest.fn(),
+      };
+      User.findOne = jest.fn().mockResolvedValue(req.body.username);
+      bcrypt.compare = jest.fn().mockResolvedValue(true);
+      jwt.sign = jest.fn().mockReturnValue("Token");
+
+      await checkUser(req, res);
+
+      expect(res.json).toHaveBeenCalledWith(expectedToken);
+    });
+  });
 });
