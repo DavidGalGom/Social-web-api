@@ -5,7 +5,7 @@ const userValidation = {
     username: Joi.string().required(),
     password: Joi.string().regex(/[a-zA-Z0-9]{3,30}/),
     name: Joi.string().required(),
-    image: Joi.string().required(),
+    photo: Joi.string().required(),
     bio: Joi.string().required(),
   }),
 };
