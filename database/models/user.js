@@ -14,11 +14,12 @@ const userSchema = new Schema({
   },
   photo: {
     type: String,
-    required: true,
+    default:
+      "https://img1.freepng.es/20180330/rkq/kisspng-final-fantasy-x-2-final-fantasy-vii-final-fantasy-monk-5abefedadd4921.4653884615224665229064.jpg",
   },
   bio: {
     type: String,
-    required: true,
+    default: "Hi to everyone",
   },
 });
 
