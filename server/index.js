@@ -10,7 +10,6 @@ const {
 } = require("./middlewares/error");
 const usersRoutes = require("./routes/usersRoutes");
 const userValidation = require("./schemas/userSchema");
-const auth = require("./middlewares/auth");
 
 const app = express();
 
@@ -36,7 +35,7 @@ const initializeServer = (port) =>
 app.use(morgan("dev"));
 app.use(cors());
 app.use(express.json());
-app.use("/users", auth, validate(userValidation, {}, {}), usersRoutes);
+app.use("/users", validate(userValidation, {}, {}), usersRoutes);
 app.use(notFoundErrorHandler);
 app.use(generalErrorHandler);
 
