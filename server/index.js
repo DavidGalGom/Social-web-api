@@ -3,7 +3,7 @@ const cors = require("cors");
 const debug = require("debug")("users:server");
 const express = require("express");
 const morgan = require("morgan");
-const { validate } = require("../database/models/user");
+const { validate } = require("express-validation");
 const {
   notFoundErrorHandler,
   generalErrorHandler,
